@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyALF9OVY5SGM9yMQivbJ_PeyxfA2Y7FHek",
+    authDomain: "keymashdata.firebaseapp.com",
+    databaseURL: "https://keymashdata.firebaseio.com",
+    projectId: "keymashdata",
+    storageBucket: "keymashdata.appspot.com",
+    messagingSenderId: "342753948853"
+  };
+  firebase.initializeApp(config);
+</script>
+</head>
+<body>
+<textarea id="a"></textarea>
+<input type="button" onclick="var a = document.getElementById('a').value; if (a.length > 10 && a.length < 513) {firebase.database().ref('spam').push(a); document.getElementById('a').innerHTML='';}"></body>
+</html>
