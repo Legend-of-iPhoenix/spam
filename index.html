@@ -18,5 +18,5 @@
 </head>
 <body>
 <textarea id="a"></textarea>
-<input type="button" onclick="var a = document.getElementById('a').value; if (a.length > 10 && a.length < 513) {firebase.database().ref('spam').push(a); document.getElementById('a').innerHTML='';}"></body>
+<input type="button" onclick="var a = document.getElementById('a').value; if (a.length > 10 && a.length < 513) {firebase.database().ref('spam').push(a); document.getElementById('a').value='';}"></body>
 </html>
