@@ -28,21 +28,27 @@ window.onload = function() {
   		n = snapshot.val();
   	});
   }
-}
-
-document.getElementById("a").addEventListener("keyup", function(event) {
-  event.preventDefault();
+  document.getElementById("a").addEventListener("keydown", function(event) {
+  //event.preventDefault();
   if (event.keyCode === 13) {
   	submitMessage();
   }
+  if (document.getElementById("a").value.length >= 100 && event.keyCode != 8) {
+  	event.preventDefault();
+  }
+  else
+  {
+  	return false;
+  }
 });
+}
 
 function submitMessage() {
   var a = document.getElementById('a').value;
   if (a != lastMessage)
   {
   	lastMessage = a;
-  if (a.length > 10 && a.length < 100) {
+  if (a.length > 10 && a.length <= 100) {
     firebase.database().ref('spam').push(a);
     document.getElementById('a').value='';
     var string = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ";
