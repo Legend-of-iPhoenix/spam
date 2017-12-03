@@ -15,8 +15,34 @@
   };
   firebase.initializeApp(config);
 </script>
+  <script src="js/main.js"></script>
+  <style>
+  body {
+  	background-color: #eee;
+  	color: #333;
+  }
+table, td {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+}
+th {
+	border: 1px solid #ccc;
+  border-collapse: collapse;
+  font-variant: small-caps;
+}
+strong {
+	font-variant: small-caps;
+}
+</style>
 </head>
 <body>
-<textarea id="a"></textarea>
-<input type="button" onclick="var a = document.getElementById('a').value; if (a.length > 10 && a.length < 513) {firebase.database().ref('spam').push(a); document.getElementById('a').value='';}"></body>
+<input type="text" id="a" style="width: 100%">
+<input type="button" onclick="submitMessage()" value="submit"><br/>
+<table id="stats" style="display: inline-block">
+	<tr>
+		<th>Character</th>
+		<th>Quantity</th>
+	</tr>
+</table>
+</body>
 </html>
