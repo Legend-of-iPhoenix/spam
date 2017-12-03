@@ -1,5 +1,6 @@
 var n = [];
 var lastMessage = "";
+var numMessages = -1;
 
 function getCookie(name) {
   var value = "; " + document.cookie;
@@ -88,6 +89,11 @@ function submitMessage() {
     	subNode2.innerText = n.reduce(add, 0);
     	node.appendChild(subNode2);
     	stats.appendChild(node);
+    	numMessages++;
+    	if (numMessages % 10 == 0)
+    	{
+    		firebase.database().ref("users/"+getCookie("spam_uid")+"/data").set(n);
+    	}
   }
 }
 }
