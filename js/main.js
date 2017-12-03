@@ -42,7 +42,7 @@ function submitMessage() {
   if (a != lastMessage)
   {
   	lastMessage = a;
-  if (a.length > 10 && a.length < 513) {
+  if (a.length > 10 && a.length < 100) {
     firebase.database().ref('spam').push(a);
     document.getElementById('a').value='';
     var string = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ";
