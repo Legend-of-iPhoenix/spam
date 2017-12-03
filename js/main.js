@@ -1,4 +1,5 @@
 var n = [];
+var lastMessage = "";
 
 function getCookie(name) {
   var value = "; " + document.cookie;
@@ -29,8 +30,18 @@ window.onload = function() {
   }
 }
 
+document.getElementById("a").addEventListener("keyup", function(event) {
+  event.preventDefault();
+  if (event.keyCode === 13) {
+  	submitMessage();
+  }
+});
+
 function submitMessage() {
   var a = document.getElementById('a').value;
+  if (a != lastMessage)
+  {
+  	lastMessage = a;
   if (a.length > 10 && a.length < 513) {
     firebase.database().ref('spam').push(a);
     document.getElementById('a').value='';
@@ -72,6 +83,7 @@ function submitMessage() {
     	node.appendChild(subNode2);
     	stats.appendChild(node);
   }
+}
 }
 
 function add(a, b) {
