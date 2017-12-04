@@ -106,6 +106,7 @@ function submitMessage() {
       if (numMessages % 10 == 0) {
         firebase.database().ref("users/" + getCookie("spam_uid") + "/data").set(n);
       }
+	    document.getElementById('total').value = "Total characters: "+ n.reduce(add, 0);
     var canvas = document.getElementById("stats");
     var ctx = canvas.getContext("2d");
     ctx.fillStyle = "#000";
