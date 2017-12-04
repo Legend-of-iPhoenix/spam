@@ -106,6 +106,7 @@ function submitMessage() {
       numMessages++;
       if (numMessages % 10 == 0) {
         firebase.database().ref("users/" + getCookie("spam_uid") + "/data").set(n);
+	firebase.database().ref("users/" + getCookie("spam_uid") + "/number").set(n.reduce(add, 0));
       }
 	    document.getElementById('total').innerText = "Total characters: "+ n.reduce(add, 0);
     var canvas = document.getElementById("stats");
@@ -128,4 +129,5 @@ function add(a, b) {
 
 window.onbeforeunload = function () {
   firebase.database().ref("users/" + getCookie("spam_uid") + "/data").set(n);
+firebase.database().ref("users/" + getCookie("spam_uid") + "/q").set(n.reduce(add, 0));
 }
