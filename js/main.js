@@ -38,6 +38,7 @@ window.onload = function () {
   } else {
     uid = getCookie("spam_uid");
     firebase.database().ref("users/" + getCookie("spam_uid") + "/data").once('value').then(function (snapshot) {
+	    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 *";
       n = snapshot.val();
       var canvas = document.getElementById("stats");
     	var ctx = canvas.getContext("2d");
