@@ -9,6 +9,18 @@ function getCookie(name) {
   if (parts.length == 2) return parts.pop().split(";").shift();
 }
 
+  function keyToChar(e){
+    var keynum;
+
+    if(window.event) { // IE                    
+      keynum = e.keyCode;
+    } else if(e.which){ // Netscape/Firefox/Opera                   
+      keynum = e.which;
+    }
+
+    return String.fromCharCode(keynum);
+  }
+
 window.onload = function () {
 	var canvas = document.getElementById("stats");
 	canvas.width = window.innerWidth;
@@ -39,24 +51,21 @@ window.onload = function () {
   	  }
     });
   }
-  document.getElementById("a").addEventListener("keydown", function (event) {
-    //event.preventDefault();
-    if (event.keyCode === 13) {
-      submitMessage();
-    }
+  document.getElementById("a").addEventListener("input", function (event) {
+  	document.getElementById("a").value = document.getElementById("a").value.substr(0,100);
 
     if (document.getElementById("a").value.length < 100)
     {
-    	j = []
+    	j = [];
     	var string = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 *";
     	var count = 0;
-    	var a = document.getElementById("a").value;
+    	var a = document.getElementById("a").value + keyToChar(event);
     	for (var i = 0; i < 63; i++) {
         var re = new RegExp("[^" + string.substr(i, 1) + "]", "g");
         j[i] = n[i]+a.replace(re, "").length;
         count += a.replace(re, "").length;
       }
-      j[63] = n[63] + a.length - count;
+      j[63] = n[63] + (a.length -1) - count;
 		var canvas = document.getElementById("stats");
     var ctx = canvas.getContext("2d");
     ctx.fillStyle = "#000";
@@ -68,13 +77,12 @@ window.onload = function () {
       ctx.fillText(string.substr(i,1), i * canvas.width / j.length, canvas.height);
     }
     }
-    if (document.getElementById("a").value.length >= 100 && event.keyCode != 8) {
-      event.preventDefault();
-    } else {
-      return false;
-    }
   });
-
+  document.getElementById("a").addEventListener("keyup", function (event) {
+    if (event.keyCode === 13) {
+      submitMessage();
+    }
+});
 }
 
 function submitMessage() {
@@ -90,8 +98,6 @@ function submitMessage() {
       var count = 0;
       for (var i = 0; i < 63; i++) {
         var re = new RegExp("[^" + string.substr(i, 1) + "]", "g");
-        console.log(re);
-        console.log(a.replace(re, ""));
         n[i] += a.replace(re, "").length;
         count += a.replace(re, "").length;
       }
